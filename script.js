@@ -7,7 +7,6 @@ const lightboxCaption = document.getElementById("lightbox-caption");
 const closeBtn = document.getElementById("close");
 
 let currentIndex = 0;
-
 // Mouse and keyboard hover/focus effects
 function handleMouseOver(event) {
     event.target.style.transform = "scale(1.1)";
