@@ -42,3 +42,4 @@ images.forEach(img => {
 
 // Run addTabIndex when page loads
 window.onload = addTabIndex;
+
