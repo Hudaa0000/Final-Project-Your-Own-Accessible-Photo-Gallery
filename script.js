@@ -7,6 +7,7 @@ const lightboxCaption = document.getElementById("lightbox-caption");
 const closeBtn = document.getElementById("close");
 
 let currentIndex = 0;
+
 // Mouse and keyboard hover/focus effects
 function handleMouseOver(event) {
     event.target.style.transform = "scale(1.1)";
@@ -31,10 +32,15 @@ function addTabIndex() {
 // Open lightbox
 function openLightbox(index) {
     currentIndex = index;
-    lightbox.classList.remove("hidden");
+    lightbox.style.display = "flex"; // show lightbox
     lightboxImg.src = images[currentIndex].src;
     lightboxImg.alt = images[currentIndex].alt;
     lightboxCaption.textContent = figures[currentIndex].querySelector("figcaption").textContent;
+}
+
+// Close lightbox
+function closeLightbox() {
+    lightbox.style.display = "none"; // hide lightbox
 }
 
 // Navigate lightbox
@@ -57,29 +63,27 @@ figures.forEach((figure, index) => {
     img.addEventListener("focus", handleFocus);
     img.addEventListener("blur", handleBlur);
 
-    // Click to open lightbox
+    // Click or Enter opens lightbox
     figure.addEventListener("click", () => openLightbox(index));
-
-    // Enter key opens lightbox
     figure.addEventListener("keydown", e => {
         if (e.key === "Enter") openLightbox(index);
     });
 });
 
-// Close lightbox
-closeBtn.addEventListener("click", () => lightbox.classList.add("hidden"));
+// Close lightbox events
+closeBtn.addEventListener("click", closeLightbox);
 lightbox.addEventListener("click", e => {
-    if (e.target === lightbox) lightbox.classList.add("hidden");
+    if (e.target === lightbox) closeLightbox();
 });
 
-// Arrow keys navigation
+// Keyboard navigation inside lightbox
 document.addEventListener("keydown", e => {
-    if (!lightbox.classList.contains("hidden")) {
+    if (lightbox.style.display === "flex") {
         if (e.key === "ArrowRight") showNext();
         if (e.key === "ArrowLeft") showPrev();
-        if (e.key === "Escape") lightbox.classList.add("hidden");
+        if (e.key === "Escape") closeLightbox();
     }
 });
 
+// Initialize
 window.onload = addTabIndex;
-
