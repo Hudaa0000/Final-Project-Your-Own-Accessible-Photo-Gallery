@@ -42,6 +42,8 @@ img {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    /* Hide by default */
+    display: none;
 }
 
 #lightbox img {
@@ -64,8 +66,3 @@ img {
     font-size: 3em;
     cursor: pointer;
 }
-
-.hidden {
-    display: none;
-}
-
